@@ -66,7 +66,7 @@ const HeaderSidebar = () => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isSidebarOpen]);
+  }, [isSidebarOpen, handleOutsideClick]);
 
   return (
     <>
@@ -101,5 +101,7 @@ const HeaderSidebar = () => {
     </>
   );
 };
+
+HeaderSidebar.displayName = "HeaderSidebar";
 
 export default HeaderSidebar;
