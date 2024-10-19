@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { name: "Internship", slug: "/Internship", icon: TiDocument, color: "text-black" },
 ];
 
+// Add display name to NavItem
 const NavItem = React.memo(({ item, isActive }) => (
   <li
     className={`flex gap-4 items-center text-lg font-medium cursor-pointer pl-5 pt-4 pb-4 hover:text-violet-400 hover:font-bold ${
@@ -24,9 +25,11 @@ const NavItem = React.memo(({ item, isActive }) => (
   </li>
 ));
 
+NavItem.displayName = "NavItem"; // Add display name here
+
 const Sidebar = () => {
   const pathname = usePathname();
-  
+
   return (
     <div className="h-full pt-5 p-4 pl-0 flex flex-col border border-r-violet-100">
       <div className="mt-5 mb-10 self-center text-center">
@@ -36,7 +39,7 @@ const Sidebar = () => {
       </div>
       <ul className="mt-8">
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.slug; 
+          const isActive = pathname === item.slug;
 
           return (
             <Link href={item.slug} key={item.slug}>
@@ -52,5 +55,5 @@ const Sidebar = () => {
   );
 };
 
-Sidebar.displayName = "Sidebar";
+Sidebar.displayName = "Sidebar"; // This is already present
 export default Sidebar;

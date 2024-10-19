@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BsTextParagraph } from "react-icons/bs";
 import { SlBadge } from "react-icons/sl";
@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   },
   {
     name: "Internship",
-    slug: "/Internship", 
+    slug: "/Internship",
     icon: TiDocument,
     color: "text-black",
   },
@@ -45,16 +45,17 @@ const NavItem = React.memo(({ item, isActive, onClick }) => (
   </Link>
 ));
 
-const HeaderSidebar = () => { 
+const HeaderSidebar = () => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
   const sidebarRef = useRef(null);
 
-  const handleOutsideClick = (event) => {
+  // Wrap handleOutsideClick with useCallback
+  const handleOutsideClick = useCallback((event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
       dispatch(toggleSidebar());
     }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSidebarOpen) {
@@ -84,13 +85,13 @@ const HeaderSidebar = () => {
           <div className="h-full pt-8 p-4 flex flex-col">
             <ul className="space-y-4">
               {NAV_ITEMS.map((item) => {
-                const isActive = window.location.pathname === item.slug; 
+                const isActive = window.location.pathname === item.slug;
                 return (
                   <NavItem
                     key={item.slug}
                     item={item}
                     isActive={isActive}
-                    onClick={() => dispatch(toggleSidebar())} 
+                    onClick={() => dispatch(toggleSidebar())}
                   />
                 );
               })}
