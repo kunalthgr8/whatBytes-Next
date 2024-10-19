@@ -45,12 +45,14 @@ const NavItem = React.memo(({ item, isActive, onClick }) => (
   </Link>
 ));
 
+// Set displayName for NavItem
+NavItem.displayName = "NavItem";
+
 const HeaderSidebar = () => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
   const sidebarRef = useRef(null);
 
-  // Wrap handleOutsideClick with useCallback
   const handleOutsideClick = useCallback((event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
       dispatch(toggleSidebar());
@@ -103,6 +105,7 @@ const HeaderSidebar = () => {
   );
 };
 
+// Set displayName for HeaderSidebar
 HeaderSidebar.displayName = "HeaderSidebar";
 
 export default HeaderSidebar;
